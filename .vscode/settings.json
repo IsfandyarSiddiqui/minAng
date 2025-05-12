@@ -1,0 +1,12 @@
+{
+    "files.exclude": {
+        "**/*.json": true, // Exclude all files and folders
+        "**/.*": true, // Exclude all files and folders
+        "**/node_modules": true, // Exclude all files and folders
+        "**/index.html": true, // Exclude all files and folders
+        "**/styles.css": true, // Exclude all files and folders
+        "**/main.ts": true, // Exclude all files and folders
+        "**/public": true, // Exclude all files and folders
+        "**/*.md": true, // Exclude all files and folders
+    }
+}
