@@ -8,31 +8,26 @@ export class CalculatorService {
   regB: number = 0;
   regC: number = 0;
   regD: number = 0;
-  mod: number = 32;
   constructor() { }
 
-  setMod(modi: number) {
-    this.mod = modi;
+  add(x: number, reg: registerType, mod: number) {
+    this.updateRegister(reg, (val) => (val + x) % mod);
   }
 
-  add(x: number, reg: 'a' | 'b' | 'c' | 'd') {
-    this.updateRegister(reg, (val) => (val + x) % this.mod);
+  subtract(x: number, reg: registerType, mod: number) {
+    this.updateRegister(reg, (val) => (val - x + mod) % mod);
   }
 
-  subtract(x: number, reg: 'a' | 'b' | 'c' | 'd') {
-    this.updateRegister(reg, (val) => (val - x + this.mod) % this.mod);
+  multiply(x: number, reg: registerType, mod: number) {
+    this.updateRegister(reg, (val) => (val * x) % mod);
   }
 
-  multiply(x: number, reg: 'a' | 'b' | 'c' | 'd') {
-    this.updateRegister(reg, (val) => (val * x) % this.mod);
-  }
-
-  divide(x: number, reg: 'a' | 'b' | 'c' | 'd') {
+  divide(x: number, reg: registerType, mod: number) {
     if (x === 0) return; // avoid division by zero
-    this.updateRegister(reg, (val) => Math.floor(val / x) % this.mod);
+    this.updateRegister(reg, (val) => Math.floor(val / x) % mod);
   }
 
-  private updateRegister(reg: 'a' | 'b' | 'c' | 'd', operation: (val: number) => number) {
+  private updateRegister(reg: registerType, operation: (val: number) => number) {
     switch (reg) {
       case 'a': this.regA = operation(this.regA); break;
       case 'b': this.regB = operation(this.regB); break;
@@ -41,3 +36,5 @@ export class CalculatorService {
     }
   }
 }
+
+export type registerType = 'a' | 'b' | 'c' | 'd';
